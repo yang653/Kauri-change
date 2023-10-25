@@ -1,0 +1,10 @@
+salticidae:提供异步网络
+secp256k1:提供签名，证书分发
+hotstuff_app.cpp:main函数所在文件，脚本最先启动的文件
+liveness:活性，其中领导者更换就在这一个模块
+hotstuff.app：共识协议核心，包含怎么fanout
+
+view_change
+rorate():开始更换领导人
+stop_rorate():停止更换领导人
+do_new_consensus():接收到qc之后开启下一轮
