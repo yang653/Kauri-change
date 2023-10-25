@@ -29,6 +29,8 @@
 
 namespace hotstuff {
 
+
+
 struct Proposal;
 struct Vote;
 struct Finality;

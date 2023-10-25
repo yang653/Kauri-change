@@ -25,11 +25,12 @@
 #include <cstddef>
 #include <ios>
 
-#include "salticidae/netaddr.h"
-#include "salticidae/ref.h"
 #include "hotstuff/type.h"
 #include "hotstuff/util.h"
 #include "hotstuff/crypto.h"
+#include "salticidae/netaddr.h"
+#include "salticidae/ref.h"
+
 
 namespace hotstuff {
 
@@ -126,8 +127,8 @@ get_hashes(const std::vector<Hashable> &plist) {
 }
 
 struct NewView_N{
-    Vote Vote_Resp;
-    Proposal Vote_Req;
+    Vote *Vote_Resp;
+    Proposal *Vote_Req;
     int viewNum=0;
     ReplicaID id;
 };

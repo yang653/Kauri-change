@@ -232,7 +232,12 @@ std::vector<block_t> HotStuffCore::FindEquivProof(const block_t &Bparents, const
 {
     std::vector<block_t> c;
     for(auto newview:Nvset){
-        block_t blk=newview.second->Vote_Req.blk;
+        block_t blk;
+        if(newview.second->Vote_Req!=nullptr)
+        {
+            Proposal newproposal=*(newview.second->Vote_Req);
+            blk=newproposal.blk;
+        }
         if(blk->height==Banc->height&&blk!=Banc){
             for(block_t b=blk;b->height>b_exec->height;b=b->parents[0]){
                 if(b->height==Bparents->height&&b!=Bparents){

@@ -252,7 +252,7 @@ void HotStuffBase::propose_handler(MsgPropose &&msg, const Net::conn_t &conn) {
     // }
     nextview->id=id;
     //nextview.viewNum=vheight;
-    nextview->Vote_Req=prop;
+    nextview->Vote_Req=&prop;
 
     block_t blk = prop.blk;
     if (!blk) return;
@@ -656,7 +656,11 @@ void HotStuffBase::newview_handler(MsgNewview &&msg, const Net::conn_t &conn)
             vector<block_t> blks;
             for(const auto& new_view: NVset_t){
                 NewView value=new_view.second;
-                blks.push_back(value->Vote_Req.blk);
+                Proposal newproposal;
+                if(value->Vote_Req!=nullptr){
+                    newproposal=*(value->Vote_Req);
+                }
+                blks.push_back(newproposal.blk);
             }
             int heightest=blks[0]->height;
             block_t highblk=blks[0];
@@ -676,7 +680,11 @@ void HotStuffBase::newview_handler(MsgNewview &&msg, const Net::conn_t &conn)
             }
             std::unordered_map<block_t,int> numvote;
             for(const auto& newview:NVset_t){
-                block_t respBlk=storage->find_blk(newview.second->Vote_Resp.blk_hash);
+                Vote newvote;
+                if(newview.second->Vote_Resp!=nullptr){
+                    newvote=*(newview.second->Vote_Resp);
+                }
+                block_t respBlk=storage->find_blk(newvote.blk_hash);
                 if(respBlk==nullptr){
                     //throw std::runtime_error("block referred by qc not fetched");
                     continue;
@@ -849,7 +857,8 @@ void HotStuffBase::do_vote(Proposal prop, const Vote &vote) {
             // }
             nextview->id=id;
             //nextview.viewNum=vheight;
-            nextview->Vote_Resp=vote;
+            Vote newvote=vote;
+            nextview->Vote_Resp=&newvote;
 
         if (childPeers.empty()) {
             //HOTSTUFF_LOG_PROTO("send vote");
