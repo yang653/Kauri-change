@@ -27,6 +27,7 @@
 
 #include "salticidae/netaddr.h"
 #include "salticidae/ref.h"
+#include"hotstuff/consensus.h"
 #include "hotstuff/type.h"
 #include "hotstuff/util.h"
 #include "hotstuff/crypto.h"
