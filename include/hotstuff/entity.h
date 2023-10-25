@@ -25,7 +25,6 @@
 #include <cstddef>
 #include <ios>
 
-#include "hotstuff/consensus.h"
 #include "salticidae/netaddr.h"
 #include "salticidae/ref.h"
 #include "hotstuff/type.h"

@@ -22,10 +22,10 @@
 #include <set>
 #include <unordered_map>
 
-#include "promise.hpp"
-#include "type.h"
-#include "entity.h"
-#include "crypto.h"
+#include "hotstuff/promise.hpp"
+#include "hotstuff/type.h"
+#include "hotstuff/entity.h"
+#include "hotstuff/crypto.h"
 
 namespace hotstuff {
 
