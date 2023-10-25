@@ -17,6 +17,7 @@
 #ifndef _HOTSTUFF_ENT_H
 #define _HOTSTUFF_ENT_H
 
+
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -31,6 +32,9 @@
 #include "hotstuff/crypto.h"
 
 namespace hotstuff {
+
+struct Vote;
+struct Proposal;
 
 enum EntityType {
     ENT_TYPE_CMD = 0x0,
