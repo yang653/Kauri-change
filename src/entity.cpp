@@ -19,6 +19,15 @@
 
 namespace hotstuff {
 
+void NewView_N::serialize(DataStream &s) const{
+    s<<*Vote_Resp<<*Vote_Req<<viewNum<<id;
+}
+
+void NewView_N::unserialize(DataStream &s){
+    s>>*Vote_Resp>>*Vote_Req>>viewNum>>id;
+}
+
+
 void Block::serialize(DataStream &s) const {
     s << htole((uint32_t)parent_hashes.size());
     for (const auto &hash: parent_hashes)
