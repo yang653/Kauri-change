@@ -109,7 +109,7 @@ public:
     BoxObj<EntityStorage> storage;
     uint16_t numberOfChildren;
 
-    HotStuffCore(ReplicaID id, privkey_bt &&priv_key):into_newview(false),finish_material(false){}
+    HotStuffCore(ReplicaID id, privkey_bt &&priv_key);
     virtual ~HotStuffCore() {
         b0->qc_ref = nullptr;
     }

@@ -37,6 +37,7 @@ HotStuffCore::HotStuffCore(ReplicaID id,
         b_exec(b0),
         vheight(0),
         priv_key(std::move(priv_key)),
+        into_newview(false),finish_material(false),
         tails{b0},
         vote_disabled(false),
         id(id),
@@ -222,7 +223,7 @@ FindEquivProof
         for (size_t i = 0; i < blk->cmds.size(); i++)
             do_decide(Finality(id, 1, i, blk->height,
                                 blk->cmds[i], blk->get_hash()));
-    }git config --global http.postBuffer
+    }
     //b_exec = blk;
     b_exec = blk1;
 }
