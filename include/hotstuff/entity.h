@@ -131,6 +131,10 @@ struct NewView_N{
     Proposal *Vote_Req;
     int viewNum=0;
     ReplicaID id;
+
+    void serialize(DataStream &s) const;
+
+    void unserialize(DataStream &s);
 };
 
 using NewView = salticidae::ArcObj<NewView_N>;
