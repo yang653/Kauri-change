@@ -94,7 +94,7 @@ void MsgRespBlock::postponed_parse(HotStuffCore *hsc) {
 }
 
 const opcode_t MsgNewview::opcode;
-MsgNewview::MsgNewview(const NewView &newview) { serialized << newview; }
+MsgNewview::MsgNewview(const NewView_N &newview) { serialized << newview; }
 void MsgNewview::postponed_parse(HotStuffCore *hsc) {
     serialized>>newview;
 }
@@ -250,9 +250,9 @@ void HotStuffBase::propose_handler(MsgPropose &&msg, const Net::conn_t &conn) {
     //     newview.id=id;
     //     NVset_t[id]=newview;
     // }
-    nextview->id=id;
+    nextview.id=id;
     //nextview.viewNum=vheight;
-    nextview->Vote_Req=&prop;
+    nextview.Vote_Req=&prop;
 
     block_t blk = prop.blk;
     if (!blk) return;
@@ -642,14 +642,15 @@ void HotStuffBase::newview_handler(MsgNewview &&msg, const Net::conn_t &conn)
     if(peer.is_null()) return;
     msg.postponed_parse(this);
 
+    NewView _newview=new NewView_N(msg.newview); 
     /*待定是否需要判断newview消息中的视图号超过当前的最高视图号vheight*/
-    if(id == pmaker->get_proposer()&&msg.newview->viewNum>vheight){
-        ReplicaID ID=msg.newview->id;
+    if(id == pmaker->get_proposer()&&_newview->viewNum>vheight){
+        ReplicaID ID=_newview->id;
          auto it=NVset_t.find(ID);
         if(it!=NVset_t.end()){
-            it->second=msg.newview;
+            it->second=_newview;
         }else{
-            NVset_t[ID]=msg.newview;
+            NVset_t[ID]=_newview;
         }
         if(NVset_t.size()>=config.nmajority){
             into_newview=true;
@@ -855,10 +856,10 @@ void HotStuffBase::do_vote(Proposal prop, const Vote &vote) {
             //     newview.id=id;
             //     NVset_t[id]=newview;
             // }
-            nextview->id=id;
+            nextview.id=id;
             //nextview.viewNum=vheight;
             Vote newvote=vote;
-            nextview->Vote_Resp=&newvote;
+            nextview.Vote_Resp=&newvote;
 
         if (childPeers.empty()) {
             //HOTSTUFF_LOG_PROTO("send vote");

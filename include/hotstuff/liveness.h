@@ -410,8 +410,8 @@ private:
 
     void on_exp_timeout(TimerEvent &) {
         if(proposer!=hsc->get_id()){
-            NewView nextview=hsc->get_nextview();
-            nextview->viewNum=hsc->get_vheight()+1;
+            NewView_N nextview=hsc->get_nextview();
+            nextview.viewNum=hsc->get_vheight()+1;
             pmrr.send_msg(MsgNewview(nextview),hsc->get_config().get_peer_id(proposer));
         } 
         else if (proposer == hsc->get_id())

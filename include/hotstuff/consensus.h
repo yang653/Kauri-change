@@ -74,7 +74,7 @@ class HotStuffCore {
 
     protected:
     std::unordered_map<ReplicaID,NewView> NVset_t;/*newview消息*/
-    NewView nextview;/*newview for next view number*/
+    NewView_N nextview;/*newview for next view number*/
     ReplicaID id;                  /**< identity of the replica itself */
 
     block_t get_delivered_blk(const uint256_t &blk_hash);
@@ -121,7 +121,7 @@ public:
      * functions. */
     void on_init(uint32_t nfaulty);
 
-    NewView get_nextview(){return nextview;}
+    NewView_N get_nextview(){return nextview;}
 
     uint32_t get_vheight(){return vheight;}    
 

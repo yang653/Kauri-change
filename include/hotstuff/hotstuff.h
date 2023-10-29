@@ -91,8 +91,8 @@ struct MsgRelay {
 struct MsgNewview {
     static const opcode_t opcode = 0x5;
     DataStream serialized;
-    NewView newview;
-    MsgNewview(const NewView &);
+    NewView_N newview;
+    MsgNewview(const NewView_N &);
     MsgNewview(DataStream &&s): serialized(std::move(s)) {}
     void postponed_parse(HotStuffCore *hsc);
 };
