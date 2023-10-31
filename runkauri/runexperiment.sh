@@ -40,7 +40,7 @@ do
         do
                 container_name=$(docker inspect --format '{{.Name}}' $container)
                 echo "Container Name: $container_name"
-                if [ ! $(docker exec -it $container bash -c "cd Kauri-change && test -e log0") ]
+                if [ ! $(docker exec -it "$container" bash -c "cd 'Kauri-Public' && test -e 'log0'") ]
                 then
                   docker exec -it $container bash -c "cd Kauri-change && tac log* | grep -m1 'commit <block'"
                   docker exec -it $container bash -c "cd Kauri-change && tac log* | grep -m1 'x now state'"
