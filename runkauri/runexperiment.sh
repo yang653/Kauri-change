@@ -38,6 +38,8 @@ do
         # Collect and print results.
         for container in $(docker ps -q -f name="server")
         do
+                container_name=$(docker inspect --format '{{.Name}}' $container)
+                echo "Container Name: $container_name"
                 if [ ! $(docker exec -it $container bash -c "cd Kauri-change && test -e log0") ]
                 then
                   docker exec -it $container bash -c "cd Kauri-change && tac log* | grep -m1 'commit <block'"
