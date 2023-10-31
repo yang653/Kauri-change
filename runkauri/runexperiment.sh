@@ -25,7 +25,7 @@ do
   sed  -i "s/${QTY2_STRING}/${split[2]}/g" $EXPORT_FILENAME
 
   echo '**********************************************'
-  echo "*** This setup needs ${split[3]} physical machines! ***"
+  echo "*** This setup needs ${split[3]+1} physical machines! ***"
   echo '**********************************************'
 
   for i in {1..5}
