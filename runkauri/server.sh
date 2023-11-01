@@ -16,7 +16,7 @@ service="server-$KAURI_UUID"
 service1="server1-$KAURI_UUID"
 
 # Make sure correct branch is selected for crypto
-cd Kauri-Public && git pull && git submodule update --recursive --remote
+cd Kauri-change && git pull && git submodule update --recursive --remote
 git checkout latest
 
 # Do a quick compile of the branch
